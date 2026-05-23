@@ -1,23 +1,175 @@
 import { Link } from "react-router-dom";
 
+import { motion } from "framer-motion";
+
+import {
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white">
-      <div className="text-center space-y-6">
-        <h1 className="text-6xl font-bold">
-          AI Form Pilot
-        </h1>
+    <div className="relative min-h-screen overflow-hidden bg-[#050816] text-white">
+      
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(120,119,255,0.18),transparent_35%)]" />
 
-        <p className="text-zinc-400 text-lg max-w-xl">
-          Build intelligent forms using AI-powered schema generation.
-        </p>
+      <div className="absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-cyan-500/10 blur-3xl" />
 
-        <Link
-          to="/builder"
-          className="inline-flex items-center justify-center rounded-xl bg-white text-black px-6 py-3 font-medium hover:opacity-90 transition"
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="absolute inset-0"
+      >
+        <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-violet-500/10 blur-3xl" />
+      </motion.div>
+
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-6 flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-300 backdrop-blur-xl mt-8"
         >
-          Open Builder
-        </Link>
+          <Sparkles size={16} />
+
+          AI-powered form generation
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.1,
+            duration: 0.7,
+          }}
+          className="max-w-5xl text-5xl font-bold leading-tight tracking-tight sm:text-6xl md:text-7xl"
+        >
+          Build modern forms
+
+          <span className="block bg-gradient-to-r from-white via-violet-200 to-cyan-300 bg-clip-text text-transparent">
+            with AI assistance
+          </span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.2,
+            duration: 0.7,
+          }}
+          className="mt-6 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg"
+        >
+          Generate intelligent form schemas,
+          customize fields visually,
+          and build production-ready forms
+          with a sleek low-code experience.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.7,
+          }}
+          className="mt-10 flex flex-col gap-4 sm:flex-row"
+        >
+          <Link to="/builder">
+            <Button
+              size="lg"
+              className="group h-12 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 px-8 text-base text-white shadow-lg shadow-violet-500/20 transition hover:scale-[1.02] hover:opacity-90 cursor-pointer"
+            >
+              Open Builder
+
+              <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+
+          <Button
+            variant="outline"
+            size="lg"
+            className="h-12 rounded-xl border-white/10 bg-white/5 px-8 text-base text-white backdrop-blur hover:bg-white/10"
+          >
+            Explore Features
+          </Button>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{
+            opacity: 1,
+            y: [0, -10, 0],
+          }}
+          transition={{
+            delay: 0.4,
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="mt-20 w-full max-w-5xl"
+        >
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-2xl backdrop-blur-xl">
+            
+            <div className="rounded-2xl border border-white/10 bg-black/60 p-6 text-left">
+              
+              <div className="mb-4 flex items-center gap-2">
+                <div className="h-3 w-3 rounded-full bg-red-400/80" />
+
+                <div className="h-3 w-3 rounded-full bg-yellow-400/80" />
+
+                <div className="h-3 w-3 rounded-full bg-green-400/80" />
+              </div>
+
+              <div className="space-y-4">
+                
+                <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-sm text-zinc-500">
+                    AI Prompt
+                  </p>
+
+                  <p className="mt-2 text-zinc-200">
+                    Create a modern employee onboarding form with department, role, start date, and emergency contact fields.
+                  </p>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <p className="mb-2 text-sm text-zinc-500">
+                      Generated Field
+                    </p>
+
+                    <div className="space-y-2">
+                      <div className="h-10 rounded-lg border border-white/10 bg-black/60" />
+
+                      <div className="h-10 rounded-lg border border-white/10 bg-black/60" />
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <p className="mb-2 text-sm text-zinc-500">
+                      Live Preview
+                    </p>
+
+                    <div className="space-y-2">
+                      <div className="h-10 rounded-lg border border-white/10 bg-black/60" />
+
+                      <div className="h-24 rounded-lg border border-white/10 bg-black/60" />
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

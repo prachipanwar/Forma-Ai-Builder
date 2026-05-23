@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-
+import { toast } from "sonner";
 const fieldTypes = [
   "text",
   "email",
@@ -39,10 +39,13 @@ export default function BuilderSidebar({
       ...prev,
       baseField,
     ]);
+    toast.success(
+        `${type} field added`
+      );
   };
 
   return (
-    <div className="min-h-screen border-r border-zinc-800 p-5">
+    <div className="h-full lg:sticky lg:top-0 lg:h-screen border-r border-zinc-800 p-5">
       <h2 className="mb-5 font-semibold">
         Add Fields
       </h2>
@@ -52,7 +55,7 @@ export default function BuilderSidebar({
           <button
             key={type}
             onClick={() => addField(type)}
-            className="w-full rounded-xl border border-zinc-800 bg-zinc-900 py-2 capitalize transition hover:bg-zinc-800"
+            className="w-full rounded-xl border border-zinc-800 bg-white/[0.03] backdrop-blur-xl py-4 capitalize transition hover:bg-zinc-800"
           >
             {type}
           </button>
