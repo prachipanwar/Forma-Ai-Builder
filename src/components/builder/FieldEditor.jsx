@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Trash2 } from "lucide-react";
@@ -6,6 +7,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 
 export default function FieldEditor({ selectedField, schema, setSchema }) {
+
+  const [optionsInput, setOptionsInput] = useState("");
+  useEffect(() => {
+    if (selectedField?.type === "select") {
+      setOptionsInput(selectedField.options?.join(",") || "");
+    }
+  }, [selectedField?.id]);
+
   if (!selectedField) {
     return <div className="p-5">Select a field</div>;
   }
@@ -25,6 +34,8 @@ export default function FieldEditor({ selectedField, schema, setSchema }) {
     setSchema(updatedSchema);
     toast.success("Field deleted");
   };
+
+ 
 
   return (
     <div className="h-screen lg:sticky lg:top-0 lg:h-screen p-5">
@@ -53,13 +64,21 @@ export default function FieldEditor({ selectedField, schema, setSchema }) {
             <Label>Options (comma separated)</Label>
 
             <Input
-              value={selectedField.options?.join(", ") || ""}
-              onChange={(e) =>
+              value={optionsInput}
+              onChange={(e) => {
+                const value = e.target.value;
+                setOptionsInput(value);
+
                 updateField(
                   "options",
-                  e.target.value.split(",").map((item) => item.trim())
-                )
-              }
+                  value
+                    .split(",")
+                    .map((item) => item.trim())
+                    .filter(Boolean)
+                );
+              }}
+              placeholder="Option 1, Option 2"
+              className="border-white/10 bg-black/20"
             />
           </div>
         )}

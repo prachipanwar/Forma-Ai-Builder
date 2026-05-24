@@ -12,7 +12,7 @@ function App() {
           <Route path="/builder" element={<Builder />} />
         </Routes>
       </BrowserRouter>
-      <Toaster position="top-right"  richColors />
+      <Toaster position="top-right" richColors />
     </>
   );
 }

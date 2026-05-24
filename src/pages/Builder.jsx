@@ -5,12 +5,13 @@ import BuilderSidebar from "@/components/builder/BuilderSidebar";
 import FieldEditor from "@/components/builder/FieldEditor";
 import AIPrompt from "@/components/builder/AIPrompt";
 import FormSettings from "@/components/builder/FormSettings";
-
+import FormSkeleton from "@/components/renderer/FormSkeleton";
 import { Button } from "@/components/ui/button";
 
 import { initialSchema } from "@/data/formSchema";
 
 export default function Builder() {
+  const [isGenerating, setIsGenerating] = useState(false);
   const [schema, setSchema] = useState(() => {
     const savedSchema = localStorage.getItem("form-schema");
 
@@ -57,7 +58,7 @@ export default function Builder() {
         <div className="min-h-screen border-x border-white/5 p-4 sm:p-6 lg:p-8">
           <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-white/5 pb-6">
             <div>
-              <h1 className="text-2xl font-semibold">Forma Builder 🚀</h1>
+              <h1 className="text-2xl font-semibold">Forma AI Builder 🚀</h1>
 
               <p className="mt-1 text-sm text-zinc-500">
                 Build intelligent forms visually
@@ -88,7 +89,12 @@ export default function Builder() {
           </div>
 
           <div className="mx-auto max-w-4xl">
-            {!previewMode && <AIPrompt setSchema={setSchema} />}
+            {!previewMode && (
+              <AIPrompt
+                setIsGenerating={setIsGenerating}
+                setSchema={setSchema}
+              />
+            )}
 
             {!previewMode && (
               <div className="mb-6">
@@ -109,13 +115,17 @@ export default function Builder() {
               <p className="mt-2 text-sm text-zinc-400">{formDescription}</p>
 
               <div className="mt-6">
-                <FormRenderer
-                  schema={schema}
-                  setSchema={setSchema}
-                  setSelectedFieldId={setSelectedFieldId}
-                  selectedFieldId={selectedFieldId}
-                  previewMode={previewMode}
-                />
+                {isGenerating ? (
+                  <FormSkeleton />
+                ) : (
+                  <FormRenderer
+                    schema={schema}
+                    setSchema={setSchema}
+                    setSelectedFieldId={setSelectedFieldId}
+                    selectedFieldId={selectedFieldId}
+                    previewMode={previewMode}
+                  />
+                )}
               </div>
 
               <Button

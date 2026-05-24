@@ -1,0 +1,97 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="64"
+  height="64"
+  viewBox="0 0 24 24"
+  fill="none"
+>
+  <defs>
+    <linearGradient
+      id="gradient"
+      x1="0%"
+      y1="0%"
+      x2="100%"
+      y2="100%"
+    >
+      <stop
+        offset="0%"
+        stop-color="#8B5CF6"
+      />
+      <stop
+        offset="100%"
+        stop-color="#06B6D4"
+      />
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur
+        stdDeviation="0.6"
+        result="coloredBlur"
+      />
+
+      <feMerge>
+        <feMergeNode in="coloredBlur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <path
+    d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"
+    stroke="url(#gradient)"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#glow)"
+  />
+
+  <path
+    d="m14 7 3 3"
+    stroke="url(#gradient)"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <path
+    d="M5 6v4"
+    stroke="url(#gradient)"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M19 14v4"
+    stroke="url(#gradient)"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M10 2v2"
+    stroke="url(#gradient)"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M7 8H3"
+    stroke="url(#gradient)"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M21 16h-4"
+    stroke="url(#gradient)"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M11 3H9"
+    stroke="url(#gradient)"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+</svg>

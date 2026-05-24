@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -95,7 +95,7 @@ export default function FormRenderer({
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className="w-full justify-start border-zinc-800 bg-zinc-950 text-left font-normal hover:bg-zinc-900"
+                className="w-full justify-start border-zinc-800 bg-zinc-950 text-left font-normal"
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
 
@@ -108,7 +108,7 @@ export default function FormRenderer({
             </PopoverTrigger>
 
             <PopoverContent
-              className="w-auto border-zinc-800 bg-zinc-950 p-0"
+              className="w-auto border-zinc-800 p-0"
               align="start"
             >
               <Calendar
@@ -132,9 +132,19 @@ export default function FormRenderer({
             onClick={(e) => e.stopPropagation()}
             className="w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm"
           >
-            {field.options?.map((option) => (
-              <option key={option}>{option}</option>
-            ))}
+            {field.options?.map((option, index) => {
+              const optionLabel =
+                typeof option === "string" ? option : option.label;
+
+              const optionValue =
+                typeof option === "string" ? option : option.value;
+
+              return (
+                <option key={`${optionValue}-${index}`} value={optionValue}>
+                  {optionLabel}
+                </option>
+              );
+            })}
           </select>
         );
 
@@ -158,6 +168,38 @@ export default function FormRenderer({
     }
   };
 
+  useEffect(() => {
+    if (previewMode) return;
+
+    const handleKeyNavigation = (e) => {
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") {
+        return;
+      }
+
+      e.preventDefault();
+
+      const currentIndex = schema.findIndex(
+        (field) => field.id === selectedFieldId
+      );
+
+      if (currentIndex === -1) return;
+
+      if (e.key === "ArrowDown" && currentIndex < schema.length - 1) {
+        setSelectedFieldId(schema[currentIndex + 1].id);
+      }
+
+      if (e.key === "ArrowUp" && currentIndex > 0) {
+        setSelectedFieldId(schema[currentIndex - 1].id);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyNavigation);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyNavigation);
+    };
+  }, [previewMode, schema, selectedFieldId, setSelectedFieldId]);
+
   if (schema.length === 0) {
     return (
       <div className="flex h-[300px] items-center justify-center rounded-2xl border border-dashed border-zinc-800 text-zinc-500">
@@ -179,10 +221,12 @@ export default function FormRenderer({
               }
             }}
             className={`
-              rounded-xl border p-4 pt-10 transition-all duration-200
+              rounded-xl border ${
+                previewMode ? "pt-0" : "pt-4 p-2 "
+              } transition-all duration-200
               ${
                 previewMode
-                  ? "border-transparent"
+                  ? "border-transparent pt-0"
                   : isSelected
                   ? "cursor-pointer border-violet-400 shadow-lg shadow-violet-500/20"
                   : "cursor-pointer border-zinc-800"
@@ -221,7 +265,6 @@ export default function FormRenderer({
   if (previewMode) {
     return fieldsContent;
   }
-
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext

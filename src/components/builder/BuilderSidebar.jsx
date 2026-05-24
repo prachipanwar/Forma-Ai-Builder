@@ -45,17 +45,36 @@ export default function BuilderSidebar({
   };
 
   return (
-    <div className="h-full lg:sticky lg:top-0 lg:h-screen border-r border-zinc-800 p-5">
-      <h2 className="mb-5 font-semibold">
+    <div className="h-full lg:sticky lg:top-0 lg:h-screen border-r border-zinc-800 p-4 lg:p-5">
+      <h2 className="mb-4 text-sm uppercase tracking-wide text-zinc-500">
         Add Fields
       </h2>
 
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
         {fieldTypes.map((type) => (
           <button
             key={type}
             onClick={() => addField(type)}
-            className="w-full rounded-xl border border-zinc-800 bg-white/[0.03] backdrop-blur-xl py-4 capitalize transition hover:bg-zinc-800"
+            className="
+            group
+            flex
+            items-center
+            justify-center
+            rounded-2xl
+            border
+            border-white/10
+            bg-white/[0.03]
+            px-4
+            py-4
+            capitalize
+            backdrop-blur-xl
+            transition-all
+            duration-200
+            hover:border-violet-500/30
+            hover:bg-white/[0.05]
+            hover:shadow-lg
+            hover:shadow-violet-500/10
+            "
           >
             {type}
           </button>
