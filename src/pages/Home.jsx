@@ -100,6 +100,7 @@ export default function Home() {
         </motion.div>
 
         <motion.div
+          id="features"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -149,17 +150,18 @@ export default function Home() {
         </motion.div>
 
         <motion.div
-          id="features"
-          initial={{ opacity: 0, y: 40 }}
+          initial={{
+            opacity: 0,
+            y: 30,
+          }}
           animate={{
             opacity: 1,
-            y: [0, -10, 0],
+            y: 0,
           }}
           transition={{
             delay: 0.4,
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
+            duration: 1,
+            ease: "easeOut",
           }}
           className="mt-20 w-full max-w-5xl"
         >
