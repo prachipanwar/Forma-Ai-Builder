@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import FormRenderer from "@/components/renderer/FormRenderer";
 import BuilderSidebar from "@/components/builder/BuilderSidebar";
 import FieldEditor from "@/components/builder/FieldEditor";
-import AIPrompt from "@/components/builder/AIPrompt";
+import AIPrompt from "@/components/builder/AiPrompt";
 import FormSettings from "@/components/builder/FormSettings";
 import FormSkeleton from "@/components/renderer/FormSkeleton";
 import { Button } from "@/components/ui/button";
